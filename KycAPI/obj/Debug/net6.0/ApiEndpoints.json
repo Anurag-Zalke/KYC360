@@ -80,80 +80,88 @@
   },
   {
     "ContainingType": "KycAPI.Controllers.EntityController",
-    "Method": "GetEntitiesByAddressLine",
-    "RelativePath": "api/entities/byaddressline/{addressLine}",
+    "Method": "SearchEntities",
+    "RelativePath": "api/entities/AdvanceSearch",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "addressLine",
+        "Name": "searchText",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "startDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "countries",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "KycAPI.Controllers.EntityController",
-    "Method": "GetEntitiesByCountry",
-    "RelativePath": "api/entities/bycountry/{country}",
+    "Method": "SearchEntities",
+    "RelativePath": "api/entities/search",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "country",
+        "Name": "Country",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "AddressLine",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MiddleName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Surname",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "KycAPI.Controllers.EntityController",
-    "Method": "GetEntitiesByFirstName",
-    "RelativePath": "api/entities/byfirstname/{firstName}",
+    "Method": "SearchEntities",
+    "RelativePath": "api/entities/searchall",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "firstName",
+        "Name": "searchText",
         "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "KycAPI.Controllers.EntityController",
-    "Method": "GetEntitiesByMiddleName",
-    "RelativePath": "api/entities/bymiddlename/{middleName}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "middleName",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "KycAPI.Controllers.EntityController",
-    "Method": "GetEntitiesBySurname",
-    "RelativePath": "api/entities/bysurname/{surname}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "surname",
-        "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

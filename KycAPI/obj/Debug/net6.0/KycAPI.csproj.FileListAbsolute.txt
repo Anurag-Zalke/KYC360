@@ -34,3 +34,4 @@ C:\Users\anura\Desktop\KYC360\KycAPI\KycAPI\bin\Debug\net6.0\Microsoft.EntityFra
 C:\Users\anura\Desktop\KYC360\KycAPI\KycAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\anura\Desktop\KYC360\KycAPI\KycAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\anura\Desktop\KYC360\KycAPI\KycAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\anura\Desktop\KYC360\KycAPI\KycAPI\obj\Debug\net6.0\KycAPI.sourcelink.json

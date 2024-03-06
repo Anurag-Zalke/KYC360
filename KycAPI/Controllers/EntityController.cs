@@ -101,14 +101,68 @@ namespace KycAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet("bycountry/{country}")]
-        public async Task<IActionResult> GetEntitiesByCountry(string country)
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchEntities([FromQuery] EntitySearchParameters searchParameters)
         {
+            IQueryable<Entity> query = dbContext.Entities
+                .Include(e => e.Addresses)
+                .Include(e => e.Dates)
+                .Include(e => e.Names);
+
+            if (!string.IsNullOrWhiteSpace(searchParameters.Country))
+            {
+                query = query.Where(e => e.Addresses.Any(a => a.Country.Contains(searchParameters.Country)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParameters.AddressLine))
+            {
+                query = query.Where(e => e.Addresses.Any(a => a.AddressLine.Contains(searchParameters.AddressLine)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParameters.FirstName))
+            {
+                query = query.Where(e => e.Names.Any(n => n.FirstName.Contains(searchParameters.FirstName)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParameters.MiddleName))
+            {
+                query = query.Where(e => e.Names.Any(n => n.MiddleName.Contains(searchParameters.MiddleName)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParameters.Surname))
+            {
+                query = query.Where(e => e.Names.Any(n => n.Surname.Contains(searchParameters.Surname)));
+            }
+
+            var entities = await query.ToListAsync();
+
+            if (entities == null || entities.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(entities);
+        }
+
+        [HttpGet("searchall")]
+        public async Task<IActionResult> SearchEntities([FromQuery] string? searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return BadRequest("Search text is required.");
+            }
+
             var entities = await dbContext.Entities
                 .Include(e => e.Addresses)
                 .Include(e => e.Dates)
                 .Include(e => e.Names)
-                .Where(e => e.Addresses.Any(a => a.Country == country))
+                .Where(e =>
+                    e.Addresses.Any(a => a.Country.Contains(searchText)) ||
+                    e.Addresses.Any(a => a.AddressLine.Contains(searchText)) ||
+                    e.Names.Any(n => n.FirstName.Contains(searchText)) ||
+                    e.Names.Any(n => n.MiddleName.Contains(searchText)) ||
+                    e.Names.Any(n => n.Surname.Contains(searchText))
+                )
                 .ToListAsync();
 
             if (entities == null || entities.Count == 0)
@@ -119,15 +173,51 @@ namespace KycAPI.Controllers
             return Ok(entities);
         }
 
-        [HttpGet("byaddressline/{addressLine}")]
-        public async Task<IActionResult> GetEntitiesByAddressLine(string addressLine)
+        [HttpGet("AdvanceSearch")]
+        public async Task<IActionResult> SearchEntities([FromQuery] string? searchText,
+                                                        [FromQuery] string? gender,
+                                                        [FromQuery] DateTime? startDate,
+                                                        [FromQuery] DateTime? endDate,
+                                                        [FromQuery] List<string>? countries)
         {
-            var entities = await dbContext.Entities
+            IQueryable<Entity> query = dbContext.Entities
                 .Include(e => e.Addresses)
                 .Include(e => e.Dates)
-                .Include(e => e.Names)
-                .Where(e => e.Addresses.Any(a => a.AddressLine.Contains(addressLine)))
-                .ToListAsync();
+                .Include(e => e.Names);
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                query = query.Where(e =>
+                    e.Addresses.Any(a => a.Country.Contains(searchText)) ||
+                    e.Addresses.Any(a => a.AddressLine.Contains(searchText)) ||
+                    e.Names.Any(n => n.FirstName.Contains(searchText)) ||
+                    e.Names.Any(n => n.MiddleName.Contains(searchText)) ||
+                    e.Names.Any(n => n.Surname.Contains(searchText))
+                );
+            }
+
+            if (!string.IsNullOrWhiteSpace(gender))
+            {
+                query = query.Where(e => e.Gender == gender);
+            }
+
+            if (startDate != null)
+            {
+                query = query.Where(e => e.Dates.Any(d => d.DateValue >= startDate));
+            }
+
+            if (endDate != null)
+            {
+                endDate = endDate.Value.AddDays(1).Date; // Make end date inclusive
+                query = query.Where(e => e.Dates.Any(d => d.DateValue <= endDate));
+            }
+
+            if (countries != null && countries.Any())
+            {
+                query = query.Where(e => e.Addresses.Any(a => countries.Contains(a.Country)));
+            }
+
+            var entities = await query.ToListAsync();
 
             if (entities == null || entities.Count == 0)
             {
@@ -136,60 +226,5 @@ namespace KycAPI.Controllers
 
             return Ok(entities);
         }
-
-        [HttpGet("byfirstname/{firstName}")]
-        public async Task<IActionResult> GetEntitiesByFirstName(string firstName)
-        {
-            var entities = await dbContext.Entities
-                .Include(e => e.Addresses)
-                .Include(e => e.Dates)
-                .Include(e => e.Names)
-                .Where(e => e.Names.Any(n => n.FirstName.Contains(firstName)))
-                .ToListAsync();
-
-            if (entities == null || entities.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(entities);
-        }
-
-        [HttpGet("bymiddlename/{middleName}")]
-        public async Task<IActionResult> GetEntitiesByMiddleName(string middleName)
-        {
-            var entities = await dbContext.Entities
-                .Include(e => e.Addresses)
-                .Include(e => e.Dates)
-                .Include(e => e.Names)
-                .Where(e => e.Names.Any(n => n.MiddleName.Contains(middleName)))
-                .ToListAsync();
-
-            if (entities == null || entities.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(entities);
-        }
-
-        [HttpGet("bysurname/{surname}")]
-        public async Task<IActionResult> GetEntitiesBySurname(string surname)
-        {
-            var entities = await dbContext.Entities
-                .Include(e => e.Addresses)
-                .Include(e => e.Dates)
-                .Include(e => e.Names)
-                .Where(e => e.Names.Any(n => n.Surname.Contains(surname)))
-                .ToListAsync();
-
-            if (entities == null || entities.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(entities);
-        }
-
     }
 }

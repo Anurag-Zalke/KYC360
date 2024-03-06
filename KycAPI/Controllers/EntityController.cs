@@ -144,7 +144,7 @@ namespace KycAPI.Controllers
             return Ok(entities);
         }
 
-        [HttpGet("searchall")]
+        [HttpGet("searchtext")]
         public async Task<IActionResult> SearchEntities([FromQuery] string? searchText)
         {
             if (string.IsNullOrWhiteSpace(searchText))
@@ -174,8 +174,7 @@ namespace KycAPI.Controllers
         }
 
         [HttpGet("AdvanceSearch")]
-        public async Task<IActionResult> SearchEntities([FromQuery] string? searchText,
-                                                        [FromQuery] string? gender,
+        public async Task<IActionResult> SearchEntities([FromQuery] string? gender,
                                                         [FromQuery] DateTime? startDate,
                                                         [FromQuery] DateTime? endDate,
                                                         [FromQuery] List<string>? countries)
@@ -185,16 +184,6 @@ namespace KycAPI.Controllers
                 .Include(e => e.Dates)
                 .Include(e => e.Names);
 
-            if (!string.IsNullOrWhiteSpace(searchText))
-            {
-                query = query.Where(e =>
-                    e.Addresses.Any(a => a.Country.Contains(searchText)) ||
-                    e.Addresses.Any(a => a.AddressLine.Contains(searchText)) ||
-                    e.Names.Any(n => n.FirstName.Contains(searchText)) ||
-                    e.Names.Any(n => n.MiddleName.Contains(searchText)) ||
-                    e.Names.Any(n => n.Surname.Contains(searchText))
-                );
-            }
 
             if (!string.IsNullOrWhiteSpace(gender))
             {
@@ -208,7 +197,7 @@ namespace KycAPI.Controllers
 
             if (endDate != null)
             {
-                endDate = endDate.Value.AddDays(1).Date; // Make end date inclusive
+                endDate = endDate.Value.AddDays(1).Date;
                 query = query.Where(e => e.Dates.Any(d => d.DateValue <= endDate));
             }
 

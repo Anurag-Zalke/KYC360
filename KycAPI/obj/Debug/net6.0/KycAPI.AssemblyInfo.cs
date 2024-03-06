@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KycAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fccc9ad115fd20199df48a3e6532c9e39996447c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b8edfbdb2be139dd4faa988bac3235769fc8457")]
 [assembly: System.Reflection.AssemblyProductAttribute("KycAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KycAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

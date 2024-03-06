@@ -87,11 +87,6 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "searchText",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "gender",
         "Type": "System.String",
         "IsRequired": false
@@ -153,7 +148,7 @@
   {
     "ContainingType": "KycAPI.Controllers.EntityController",
     "Method": "SearchEntities",
-    "RelativePath": "api/entities/searchall",
+    "RelativePath": "api/entities/searchtext",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

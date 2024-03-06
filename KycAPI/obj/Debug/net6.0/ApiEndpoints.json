@@ -1,0 +1,161 @@
+[
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntity",
+    "RelativePath": "api/entities",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "AddEntity",
+    "RelativePath": "api/entities",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addEntityRequest",
+        "Type": "KycAPI.Models.AddEntityRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntity",
+    "RelativePath": "api/entities/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "UpdateEntity",
+    "RelativePath": "api/entities/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "addEntityRequest",
+        "Type": "KycAPI.Models.AddEntityRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "DeleteEntity",
+    "RelativePath": "api/entities/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntitiesByAddressLine",
+    "RelativePath": "api/entities/byaddressline/{addressLine}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addressLine",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntitiesByCountry",
+    "RelativePath": "api/entities/bycountry/{country}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "country",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntitiesByFirstName",
+    "RelativePath": "api/entities/byfirstname/{firstName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "firstName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntitiesByMiddleName",
+    "RelativePath": "api/entities/bymiddlename/{middleName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "middleName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KycAPI.Controllers.EntityController",
+    "Method": "GetEntitiesBySurname",
+    "RelativePath": "api/entities/bysurname/{surname}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "surname",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
